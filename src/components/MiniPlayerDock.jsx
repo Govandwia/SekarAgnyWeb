@@ -35,12 +35,12 @@ export default function MiniPlayerDock() {
       className="mini-player-dock"
       style={{
         position: 'fixed',
-        bottom: '10px',
+        bottom: 'calc(10px + env(safe-area-inset-bottom, 0px))',
         left: '12px',
         right: '12px',
         maxWidth: '1200px',
         margin: '0 auto',
-        height: '46px',
+        height: '48px',
         backgroundColor: '#000000',
         color: '#FFFFFF',
         zIndex: 9000,
@@ -49,11 +49,33 @@ export default function MiniPlayerDock() {
         justifyContent: 'space-between',
         padding: '0 14px',
         border: '1px solid rgba(255, 255, 255, 0.22)',
-        boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+        boxShadow: '0 12px 36px rgba(0,0,0,0.6)',
         userSelect: 'none',
         animation: 'slideUpDock 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        overflow: 'hidden',
       }}
     >
+      {/* ── Top Progress Hairline: Always visible including mobile ── */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '2px',
+          background: 'rgba(255, 255, 255, 0.15)',
+        }}
+      >
+        <div
+          style={{
+            width: `${progressPercent}%`,
+            height: '100%',
+            background: '#FFFFFF',
+            transition: 'width 0.15s linear',
+          }}
+        />
+      </div>
+
       {/* ── Left: Thumbnail + EQ + Track Title ── */}
       <div
         onClick={openLightbox}
@@ -128,7 +150,7 @@ export default function MiniPlayerDock() {
         </div>
       </div>
 
-      {/* ── Center: Time & Scrubber ── */}
+      {/* ── Center: Time & Scrubber (Desktop) ── */}
       <div
         className="mini-player-center"
         style={{
@@ -169,7 +191,7 @@ export default function MiniPlayerDock() {
             color: '#FFFFFF',
             cursor: 'pointer',
             fontSize: '13px',
-            padding: '4px',
+            padding: '6px 8px',
             ...serif,
           }}
         >
@@ -184,7 +206,7 @@ export default function MiniPlayerDock() {
             color: '#FFFFFF',
             cursor: 'pointer',
             fontSize: '13px',
-            padding: '4px',
+            padding: '6px 8px',
             ...serif,
           }}
           className="mini-player-expand"
@@ -199,9 +221,9 @@ export default function MiniPlayerDock() {
             border: 'none',
             color: 'rgba(255, 255, 255, 0.65)',
             cursor: 'pointer',
-            fontSize: '15px',
+            fontSize: '16px',
             lineHeight: 1,
-            padding: '4px 6px',
+            padding: '6px 8px',
           }}
           title="Dismiss Player"
           aria-label="Dismiss Player"

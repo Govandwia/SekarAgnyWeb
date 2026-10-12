@@ -218,5 +218,18 @@ button {
   .detail-lyric-stage {
     top: 18vh !important;
   }
+
+  .detail-lyric-cta {
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .detail-lyric-cta .cta {
+    padding: 3px 18px !important;
+  }
+
+  .detail-lyric-cta .cta-label {
+    font-size: clamp(22px, 6vw, 30px) !important;
+    padding: 4px 0 5px !important;
+  }
 }
 

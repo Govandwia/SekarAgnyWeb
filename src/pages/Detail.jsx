@@ -527,8 +527,20 @@ function DetailInner({ id }) {
             </div>
           ))}
 
-          <div className="lyric-cta" style={{ position: 'absolute', left: '50%', top: `${RULED[1]}%`, transform: 'translateX(-50%)' }}>
-            <FramedButton as="button" color="#f1ebdf" bar={3} size="clamp(22px, 2.6vw, 34px)" onClick={() => playSong(song, { openLightbox: true })}>
+          <div className="lyric-cta detail-lyric-cta" style={{ position: 'absolute', left: '50%', top: `${RULED[1]}%`, transform: 'translate(-50%, -50%)' }}>
+            <FramedButton
+              as="button"
+              color="#f1ebdf"
+              bar={3}
+              size="clamp(22px, 2.6vw, 34px)"
+              onClick={() => playSong(song, { openLightbox: true })}
+              style={{
+                background: 'rgba(0, 0, 0, 0.52)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                padding: '3px 16px',
+              }}
+            >
               Play track
             </FramedButton>
           </div>
