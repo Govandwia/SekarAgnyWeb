@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,900&family=Cormorant+SC:wght@500;600;700&family=Inter+Tight:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #F2F2F2;
+  --stone: #D6D3D1;
+  --ink: #000000;
+  --muted: #8A8A8A;
+  --night: #000000;
+  --accent: #891A20;
+  --pad: 6px;
+  --display: 'Bodoni Moda', 'Instrument Serif', serif;
+  --body: 'Inter Tight', sans-serif;
+  --label: 'Cormorant SC', serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--paper);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Monochrome film grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99990;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.09'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(4) infinite;
+}
+
+@keyframes grain {
+  0% { background-position: 0 0; }
+  25% { background-position: -40px 20px; }
+  50% { background-position: 30px -30px; }
+  75% { background-position: -20px -40px; }
+  100% { background-position: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+
+h1, h2, h3, h4, h5, h6, .display-font {
+  font-family: var(--display);
+  font-optical-sizing: none;
+  font-variation-settings: 'opsz' 26;
+  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.label-font {
+  font-family: var(--label);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 9px;
+  line-height: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  letter-spacing: inherit;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--ink);
+}
+
+.layout-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Minimal editorial scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.scribble-marker-stroke {
+  stroke-dasharray: 2900;
+  stroke-dashoffset: 0;
+  animation: drawMarkerLoop 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes drawMarkerLoop {
+  from { stroke-dashoffset: 2900; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ───────────────────────────────────────────────────────────
+   Mobile Responsive Rules (320px – 640px)
+   Faithfully implementing Section 8c of the Design Brief
+   ─────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  :root {
+    --pad: 6px;
+  }
+
+  /* Centered plain-text navigation bar on mobile */
+  .nav-header-inner {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Song title and 3 info rows sit below the nav, full width */
+  .home-info-panel {
+    top: 42px !important;
+    left: 6px !important;
+    right: 6px !important;
+    width: calc(100% - 12px) !important;
+  }
+
+  .home-info-title {
+    font-size: clamp(20px, 6.2vw, 26px) !important;
+    margin-bottom: 4px !important;
+  }
+
+  .home-info-row {
+    padding: 4px 0 3px !important;
+  }
+
+  .home-info-value {
+    font-size: 13.5px !important;
+  }
+
+  /* Bottom press quotes: one single quote centered */
+  .home-quotes-bar {
+    bottom: 2.8vh !important;
+    padding: 0 12px !important;
+    gap: 0 !important;
+  }
+
+  .home-quote-col {
+    width: min(320px, 92vw) !important;
+  }
+
+  .home-quote-col-1 {
+    display: none !important;
+  }
+
+  .home-quote-text {
+    font-size: clamp(16px, 4.4vw, 20px) !important;
+  }
+
+  /* Preloader wordmark on mobile */
+  .preloader-wordmark-wrap {
+    left: 6px !important;
+    right: 6px !important;
+    bottom: 11vh !important;
+  }
+
+  .preloader-wordmark {
+    font-size: clamp(34px, 9.2vw, 52px) !important;
+  }
+
+  /* Detail hero section */
+  .detail-hero-section {
+    padding-top: clamp(68px, 11vh, 96px) !important;
+  }
+
+  .detail-title {
+    font-size: clamp(36px, 9.5vw, 56px) !important;
+  }
+
+  .detail-listen-cta {
+    top: clamp(470px, 68vh, 72vh) !important;
+  }
+
+  .detail-lyric-stage {
+    top: 18vh !important;
+  }
+}
+
